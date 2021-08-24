@@ -1,0 +1,27 @@
+<header>
+    <nav class = "header-nav">
+        
+        <ul class="topnav" id="dropdown">
+            
+            <li><a href="/">PerfecTTeam</a></li>
+            <li><a href="/matches">Matches</a></li>
+            <li><a href="/matches/new">Add new Match</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/about">About</a></li>
+            <li class="topnav-right"><a href="/register">Register</a></li>
+            <li class="topnav-right"><a href="/login">Login</a></li>
+            <li class="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+        </ul>
+    </nav>
+    <script>
+        function dropdownMenu(){
+            var x = document.getElementById("dropdown");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else{
+                x.className = "topnav"                
+            }
+        }
+    </script>
+
+</header>
