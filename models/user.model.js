@@ -13,6 +13,10 @@ const userSchema =new  mongoose.Schema({
         trim: true,
         required : true
     },
+    discord_id:{ 
+        type: String,
+        trim: true,
+    },
     hashed_password:{ 
         type: String,
         required : true

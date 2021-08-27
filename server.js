@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser")
 dotenv.config()
 const port = process.env.PORT || 3000
 const mongoose = require('mongoose')
-
+const cors = reqiore('cors')
 
 
 const indexRouter = require('./routes/index')
@@ -22,6 +22,7 @@ const contactRouter = require('./routes/contact')
 const aboutRouter = require('./routes/about')
 const authRouter = require('./routes/auth')
 const registerRouter = require('./routes/register')
+const userRouter =  require("./routes/user")
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -43,12 +44,13 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(expressValidator())
-
+app.use(cors())
 app.use('/',indexRouter)
 app.use('/matches', matchesRouter)
 app.use('/about', aboutRouter)
 app.use('/contact', contactRouter)
 app.use('/', authRouter)
+app.use('/',userRouter)
 app.use('/register', registerRouter)
 
 app.use(function (err, req, res, next){
