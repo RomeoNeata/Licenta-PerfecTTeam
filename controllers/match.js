@@ -21,14 +21,26 @@ exports.matchById = (req, res, next, id) =>{
 exports.getMatches = (req, res) => {
     const matches = Match.find()
     .populate("postedBy", "_id username")
-    .select("_id title body")
+    .select("_id title body game created")
     .then((matches) => {
         res.status(200).json({matches: matches})
     })
     .catch(err => console.log(err))
 }
 
-exports.createMatch = (req,res) => {
+
+exports.getMatchesbyGame = (req, res, next, gameName) => {
+    const matches = Match.find({game : gameName})
+    .populate("postedBy", "_id username")
+    .select("_id title body game created")
+    .then((matches) => {
+        res.status(200).json({matches: matches})
+    })
+    .catch(err => console.log(err))
+}
+
+
+exports.createMatch = (req, res, next) => {
     let form = new formidable.IncomingForm()
     form.keepsExtensions = true
     form.parse(req, (err, fields, files) =>{
@@ -42,9 +54,9 @@ exports.createMatch = (req,res) => {
         req.profile.salt = undefined
         match.postedBy = req.profile
 
-        if(files.photo){
-            match.photo.data = fs.readFileSync(files.photo.path)
-            match.photo.contentType = files.photo.type
+        if(files.image){
+            match.image.data = fs.readFileSync(files.image.path)
+            match.image.contentType = files.image.type
         }
         match.save((err, result) => {
             if(err){
@@ -110,4 +122,13 @@ exports.updateMatch = (req, res, next) => {
         }
         res.json(match)
     })
+}
+
+exports.image =(req, res, next) =>{
+    res.set("Content-Type", req.match.image.contentType)
+    return res.send(req.match.image.data)
+}
+
+exports.getSingleMatch = (req, res) =>{
+    return res.json(req.match)
 }

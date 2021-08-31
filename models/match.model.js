@@ -14,9 +14,9 @@ const matchSchema = new mongoose.Schema({
         minlength: 4,
         maxlength: 150
     },
-    time:{
+    game:{
         type:String,
-        require: "You need to setup time"
+        require: "You need to select a game"
     },
     postedBy:{
         type: ObjectId,
@@ -24,12 +24,12 @@ const matchSchema = new mongoose.Schema({
     },
     created:{
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     updated:{
         type: Date,
     },
-    photo: {
+    image: {
         data: Buffer,
         contentType: String
     }

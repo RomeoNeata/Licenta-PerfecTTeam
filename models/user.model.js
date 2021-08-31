@@ -3,6 +3,10 @@ const { v1: uuidv1 } = require('uuid');
 const crypto = require('crypto')
 
 const userSchema =new  mongoose.Schema({
+    // photo:{
+    //     data: Buffer,
+    //     contentType: String
+    // },
     username:{ 
         type: String,
         trim: true,
@@ -15,6 +19,10 @@ const userSchema =new  mongoose.Schema({
     },
     discord_id:{ 
         type: String,
+        trim: true
+    },
+    favourite_game:{
+        type: String,
         trim: true,
     },
     hashed_password:{ 
@@ -24,9 +32,13 @@ const userSchema =new  mongoose.Schema({
     salt: String,
     created:{
         type: Date,
-        default: Date.now(),
+        default: Date.now()
     },
-    updated: Date, 
+    updated: Date,
+    about: {
+        type: String,
+        trim: true
+    } 
 })
 
 //encrypting the password

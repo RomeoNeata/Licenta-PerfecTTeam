@@ -21,7 +21,7 @@ exports.createMatchValidator = (req, res, next) => {
 }
 
 exports.createUserValidator = (req, res, next) => {
-    req.check("username", "Username is require").notEmpty()
+    req.check("username", "Username is required").notEmpty()
 
     req.check("email","Email must be between 3 to 32 characters")
     .matches(/.+\@.+\..+/)
@@ -30,7 +30,7 @@ exports.createUserValidator = (req, res, next) => {
         min: 4,
         max: 2000
     })
-    req.check("password", "Password is require").notEmpty()
+    req.check("password", "Password is required").notEmpty()
     req.check('password')
     .isLength({min: 6})
     .withMessage("Password must contain at least 6 characters")
