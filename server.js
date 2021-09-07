@@ -15,12 +15,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 
-const indexRouter = require('./routes/index')
 const matchesRouter = require('./routes/matches')
-const contactRouter = require('./routes/contact')
-const aboutRouter = require('./routes/about')
 const authRouter = require('./routes/auth')
-const registerRouter = require('./routes/register')
 const userRouter =  require("./routes/user")
 
 
@@ -45,17 +41,13 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(expressValidator())
 app.use(cors())
-app.use('/',indexRouter)
 app.use('/matches', matchesRouter)
-app.use('/about', aboutRouter)
-app.use('/contact', contactRouter)
 app.use('/', authRouter)
 app.use('/',userRouter)
-app.use('/register', registerRouter)
 
-app.use(function (err, req, res, next){
-    if(err.name === 'UnauthorizedError'){
-        res.status(401).json({error: "Not logged in!"})
-    }
-})
+// app.use(function (err, req, res, next){
+//     if(err.name === 'UnauthorizedError'){
+//         res.status(401).json({error: "Not logged in!"})
+//     }
+// })
 app.listen(process.env.PORT || 3000)

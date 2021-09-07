@@ -33,7 +33,7 @@ exports.allUsers = (req, res) => {
             })
         }
         res.json(users)
-    }).select("username discord_id updated created")
+    }).sort("created").select("username discord_id favourite_game updated created")
 }
 
 exports.getUser = (req, res) => {
@@ -57,34 +57,6 @@ exports.updateUser = (req, res, next) => {
         res.json({user})
     })
 }
-// exports.updateUser = (req, res, next) => {
-//     let form = new formidable.IncomingForm()
-//     form.keepExtensions = true
-//     form.parse(req, (err, fields, files) =>{
-//         if(err) {
-//             return res.status(400).json({
-//                 error: "Photo can't be uploaded"
-//             })
-//         }
-//         let user = req.profile
-//         user = _.extend(user, fields)
-//         user.updated = Date.now()
-//         if(files.photo){
-//             user.photo.data = fs.readFileSync(files.photo.path)
-//             user.photo.contentType = files.photo.type
-//         }
-//         user.save((err, result) => {
-//             if(err) {
-//                 return res.status(400).json({
-//                     error: err
-//                 })
-//             }
-//             user.hashed_password = undefined
-//             user.salt = undefined
-//             res.json(user)
-//         })
-//     })
-// }
 
 exports.deleteUser = (req, res, next) =>{
     let user = req.profile

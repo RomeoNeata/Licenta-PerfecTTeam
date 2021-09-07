@@ -32,7 +32,14 @@ const matchSchema = new mongoose.Schema({
     image: {
         data: Buffer,
         contentType: String
-    }
+    },
+    comments: [
+        {
+            comment: String,
+            created: { type: Date, default: Date.now },
+            postedBy: { type: ObjectId, ref: 'User' }
+        }
+    ]
 })
 
 module.exports = mongoose.model("Match", matchSchema)
